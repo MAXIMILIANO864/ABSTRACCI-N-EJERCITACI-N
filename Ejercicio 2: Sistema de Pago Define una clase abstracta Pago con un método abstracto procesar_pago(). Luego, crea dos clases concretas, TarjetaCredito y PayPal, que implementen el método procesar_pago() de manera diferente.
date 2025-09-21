@@ -1,0 +1,23 @@
+from abc import ABC, abstractmethod
+class Pago(ABC):
+    @abstractmethod
+    def procesar_pago(self, monto):
+        pass
+class TarjetaCredito(Pago):
+    def __init__(self, titular, numero):
+        self.titular = titular
+        self.numero = numero
+    def procesar_pago(self, monto):
+        print(f"Procesando pago de ${monto} con Tarjeta de Crédito de {self.titular} 💳")
+class PayPal(Pago):
+    def __init__(self, correo):
+        self.correo = correo
+    def procesar_pago(self, monto):
+        print(f"Procesando pago de ${monto} a través de PayPal de {self.correo} 🖥️")
+if __name__ == "__main__":
+    pagos = [
+        TarjetaCredito("Juan Pérez", "1234-5678-9012"),
+        PayPal("juanperez@example.com")
+    ]
+    for p in pagos:
+        p.procesar_pago(150.75)
