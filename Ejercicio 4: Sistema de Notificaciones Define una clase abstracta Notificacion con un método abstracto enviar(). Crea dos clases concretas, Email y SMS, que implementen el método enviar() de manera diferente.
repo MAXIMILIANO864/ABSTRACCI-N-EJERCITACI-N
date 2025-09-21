@@ -1,0 +1,22 @@
+from abc import ABC, abstractmethod
+class Notificacion(ABC):
+    @abstractmethod
+    def enviar(self, mensaje):
+        pass
+class Email(Notificacion):
+    def __init__(self, direccion):
+        self.direccion = direccion
+    def enviar(self, mensaje):
+        print(f"Enviando Email a {self.direccion}: {mensaje}")
+class SMS(Notificacion):
+    def __init__(self, numero):
+        self.numero = numero
+    def enviar(self, mensaje):
+        print(f"Enviando SMS al número {self.numero}: {mensaje}")
+if __name__ == "__main__":
+    notificaciones = [
+        Email("pepe@exe.com"),
+        SMS("+123456789")
+    ]
+    for n in notificaciones:
+        n.enviar("¡Hola! Esta es una notificación.")
